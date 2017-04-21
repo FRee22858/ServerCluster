@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Global">
+      <UniqueIdentifier>{cd1f4055-8e8f-45b4-98c3-e76cf627e283}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Manager">
+      <UniqueIdentifier>{2a085d4d-20bc-4f9c-b0eb-b022d034fe7f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Zone">
+      <UniqueIdentifier>{e12b3a2b-64e2-4819-a7a6-4d67dbfded95}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Relation">
+      <UniqueIdentifier>{0dd1c468-760f-4706-972f-52410f281af1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Gate">
+      <UniqueIdentifier>{8a4e6969-33f1-40bc-8449-ae5cf17fad51}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Barrack">
+      <UniqueIdentifier>{c4bc1b2e-87a5-43be-b454-2e4582723d1f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BattleManager">
+      <UniqueIdentifier>{7f19a96c-69df-4cdf-8aef-ce08ab08d8b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Battle">
+      <UniqueIdentifier>{2dbbbe3d-18d2-40e1-a416-557fcc6b4c65}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,9 @@
+Client 1
+Zone 2
+Gate 3
+Global 4
+Manager 5
+Relation 6
+Barrck 7
+BattleManager 8
+Battle 9
