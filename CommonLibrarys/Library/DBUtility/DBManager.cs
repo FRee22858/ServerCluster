@@ -24,9 +24,21 @@ namespace DBUtility
         {
             get { return _conn; }
         }
+        /// <summary>
+        /// 存储
+        /// </summary>
         private Queue<AbstractDBQuery> _saveQueue;
+        /// <summary>
+        /// 执行
+        /// </summary>
         private Queue<AbstractDBQuery> _executionQueue = new Queue<AbstractDBQuery>();
+        /// <summary>
+        /// 更新
+        /// </summary>
         private Queue<AbstractDBQuery> _postUpdateQueue = new Queue<AbstractDBQuery>();
+        /// <summary>
+        /// 异常日志
+        /// </summary>
         private Queue<string> _exceptionLogQueue = new Queue<string>();
 
         public ReconnectRecord m_cReconnectInfo;
