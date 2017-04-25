@@ -38,6 +38,10 @@ namespace CommonUtility
             _prev = now;
             return delta;
         }
+        /// <summary>
+        /// 从调用Update到现在的时间 
+        /// </summary>
+        /// <returns></returns>
         public double GetThis()
         {
             var now = DateTime.Now;

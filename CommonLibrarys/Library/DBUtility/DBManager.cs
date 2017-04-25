@@ -210,16 +210,36 @@ namespace DBUtility
         }
         public Queue<AbstractDBQuery> GetPostUpdateQueue()
         {
-            Queue<AbstractDBQuery> result = new Queue<AbstractDBQuery>();
+            Queue<AbstractDBQuery> result;//= new Queue<AbstractDBQuery>();
             lock (_postUpdateQueue)
             {
-                while (_postUpdateQueue.Count>0)
+                //while (_postUpdateQueue.Count>0)
+                //{
+                //    AbstractDBQuery query = _postUpdateQueue.Dequeue();
+                //    result.Enqueue(query);
+                //}
+                if (_postUpdateQueue.Count > 0)
                 {
-                    AbstractDBQuery query = _postUpdateQueue.Dequeue();
-                    result.Enqueue(query);
+                    result = _postUpdateQueue;
+                    _postUpdateQueue = new Queue<AbstractDBQuery>();
+                    return result;
                 }
             }
-            return result;
+            return null;
+        }
+        public Queue<string> GetExceptionLogQueue()
+        {
+            Queue<string> result; //= new Queue<string>();
+            lock (_exceptionLogQueue)
+            {
+                if (_exceptionLogQueue.Count>0)
+                {
+                    result = _exceptionLogQueue;
+                    _exceptionLogQueue = new Queue<string>();
+                    return result;
+                }
+            }
+            return null;
         }
     }
 }
