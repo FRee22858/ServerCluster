@@ -94,6 +94,8 @@ namespace DBUtility
         {
             var tempPostUpdateQueue = new Queue<AbstractDBQuery>();
             var time = new SystemTime();
+            time.Init();
+
         }
 
     }
