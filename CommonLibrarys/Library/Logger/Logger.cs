@@ -23,32 +23,32 @@ namespace Logger
         {
             _logger.Write(obj);
         }
-        static void Write(string format, params object[] args)
+        static public void Write(string format, params object[] args)
         {
             _logger.Write(format, args);
         }
-        static void WriteLine(object obj)
+        static public void WriteLine(object obj)
         {
             _logger.WriteLine(obj);
         }
-        static void WriteLine(string format, params object[] args)
+        static public void WriteLine(string format, params object[] args)
         {
             _logger.WriteLine(format, args);
         }
 
-        static public void Info(object obj)
+        static public public void Info(object obj)
         {
             _logger.Info(obj);
         }
-        static void Info(string format, params object[] args)
+        static public void Info(string format, params object[] args)
         {
             _logger.Info(format, args);
         }
-        static void InfoLine(object obj)
+        static public void InfoLine(object obj)
         {
             _logger.InfoLine(obj);
         }
-        static void InfoLine(string format, params object[] args)
+        static public void InfoLine(string format, params object[] args)
         {
             _logger.InfoLine(format, args);
         }
@@ -57,15 +57,15 @@ namespace Logger
         {
             _logger.Error(obj);
         }
-        static void Error(string format, params object[] args)
+        static public void Error(string format, params object[] args)
         {
             _logger.Error(format, args);
         }
-        static void ErrorLine(object obj)
+        static public void ErrorLine(object obj)
         {
             _logger.ErrorLine(obj);
         }
-        static void ErrorLine(string format, params object[] args)
+        static public void ErrorLine(string format, params object[] args)
         {
             _logger.ErrorLine(format, args);
         }
@@ -74,15 +74,15 @@ namespace Logger
         {
             _logger.Warn(obj);
         }
-        static void Warn(string format, params object[] args)
+        static public void Warn(string format, params object[] args)
         {
             _logger.Warn(format, args);
         }
-        static void WarnLine(object obj)
+        static public void WarnLine(object obj)
         {
             _logger.WarnLine(obj);
         }
-        static void WarnLine(string format, params object[] args)
+        static public void WarnLine(string format, params object[] args)
         {
             _logger.WarnLine(format, args);
         }
