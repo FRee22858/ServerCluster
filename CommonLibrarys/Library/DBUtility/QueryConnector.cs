@@ -20,7 +20,7 @@ namespace DBUtility
             catch (Exception e)
             {
                 _result = null;
-                _strErrorText = ErrorLogText(e);
+                m_strErrorText = ErrorLogText(e);
                 return false;
             }
             finally

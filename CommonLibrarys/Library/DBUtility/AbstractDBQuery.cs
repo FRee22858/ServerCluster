@@ -13,7 +13,7 @@ namespace DBUtility
         protected MySqlCommand _cmd;
         protected MySqlDataReader _reader;
         protected object _result;
-        public string _strErrorText;
+        public string m_strErrorText;
 
         internal void Init(MySqlConnection conn)
         {
