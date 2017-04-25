@@ -189,13 +189,25 @@ namespace DBUtility
                 }
             }
         }
-
         public void AddExceptionLog(string log)
         {
             lock (_exceptionLogQueue)
             {
                 _exceptionLogQueue.Enqueue(log);
             }
+        }
+        public Queue<AbstractDBQuery> GetPostUpdateQueue()
+        {
+            Queue<AbstractDBQuery> result = new Queue<AbstractDBQuery>();
+            lock (_postUpdateQueue)
+            {
+                while (_postUpdateQueue.Count>0)
+                {
+                    AbstractDBQuery query = _postUpdateQueue.Dequeue();
+                    result.Enqueue(query);
+                }
+            }
+            return result;
         }
     }
 }
