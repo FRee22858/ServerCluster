@@ -12,7 +12,7 @@ namespace SocketShared
         public UInt32 msg;
 
         /// <summary>
-        /// 包头
+        /// 报头
         /// </summary>
         static readonly public int Size = sizeof(UInt16) + sizeof(Int32);
         public SocketHeader()
@@ -39,7 +39,7 @@ namespace SocketShared
         }
     }
     /// <summary>
-    /// 包
+    /// 报文
     /// </summary>
     public class SocketPacket:ICloneable
     {

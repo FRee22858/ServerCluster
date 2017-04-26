@@ -36,7 +36,7 @@ namespace Logger
             _logger.WriteLine(format, args);
         }
 
-        static public public void Info(object obj)
+        static public void Info(object obj)
         {
             _logger.Info(obj);
         }

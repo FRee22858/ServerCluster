@@ -6,8 +6,6 @@ using System.Threading.Tasks;
 
 namespace SocketShared
 {
-    class CAPTCHA
-    {
         static public class CAPTCHA
         {
             static public int EncodeCaptcha(string count,int server)
@@ -27,5 +25,4 @@ namespace SocketShared
                 }
             }
         }
-    }
 }
