@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("BattleManagerServerLib")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("zmeit.jd.com")]
+[assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("BattleManagerServerLib")]
-[assembly: AssemblyCopyright("Copyright © zmeit.jd.com 2017")]
+[assembly: AssemblyCopyright("Copyright ©  2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // 如果此项目向 COM 公开，则下列 GUID 用于类型库的 ID
-[assembly: Guid("32043f8e-0689-4928-a094-49ae58162e97")]
+[assembly: Guid("44714f8b-e95e-4960-b8ee-3da6359374a9")]
 
 // 程序集的版本信息由下面四个值组成: 
 //
