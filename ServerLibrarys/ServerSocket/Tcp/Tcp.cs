@@ -370,7 +370,7 @@ namespace ServerSocket.Tcp
         /// <param name="first">报头</param>
         /// <param name="second">报文</param>
         /// <returns></returns>
-        private bool Write(ArraySegment<byte> first, ArraySegment<byte> second)
+        public bool Write(ArraySegment<byte> first, ArraySegment<byte> second)
         {
             lock (this)
             {
@@ -426,6 +426,20 @@ namespace ServerSocket.Tcp
             {
                 LOG.Error("tcp SendComplete exception :{0}", e.ToString());
             }
+        }
+        /// <summary>
+        /// 用于制作广播资源
+        /// </summary>
+        /// <param name="head">报头</param>
+        /// <param name="body">报文</param>
+        /// <param name="first">生成报头数组</param>
+        /// <param name="second">生成报文数组</param>
+        public static void MakeArray(MemoryStream head,MemoryStream body,out ArraySegment<byte> first,out ArraySegment<byte> second)
+        {
+            head.Seek(0, SeekOrigin.Begin);
+            body.Seek(0, SeekOrigin.Begin);
+            first = new ArraySegment<byte>(head.GetBuffer(), 0, (int)head.Length);
+            second = new ArraySegment<byte>(body.GetBuffer(), 0, (int)body.Length);
         }
     }
 }
