@@ -241,5 +241,10 @@ namespace DBUtility
             }
             return null;
         }
+        public void Call(AbstractDBQuery query,DBCallback callback=null)
+        {
+            query.OnCall(callback);
+            AddDBQuery(query);
+        }
     }
 }

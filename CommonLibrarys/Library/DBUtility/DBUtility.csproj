@@ -46,6 +46,7 @@
     <Compile Include="AbstractDBQuery.cs" />
     <Compile Include="DBManager.cs" />
     <Compile Include="DBManagerPool.cs" />
+    <Compile Include="DBProxy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QueryConnector.cs" />
     <Compile Include="ReconnectRecord.cs" />
