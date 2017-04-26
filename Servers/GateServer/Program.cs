@@ -10,6 +10,8 @@ namespace GateServer
     {
         static void Main(string[] args)
         {
+            int a = 3;
+            a++;
         }
     }
 }
