@@ -41,6 +41,9 @@
   <ItemGroup>
     <Compile Include="Server\Api.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Server\Api_Init.cs" />
+    <Compile Include="Server\Api_Members.cs" />
+    <Compile Include="Server\Api_Regist.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\CommonLibrarys\Library\Logger\Logger.csproj">
