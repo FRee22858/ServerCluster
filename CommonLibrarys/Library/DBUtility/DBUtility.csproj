@@ -32,7 +32,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="MySql.Data">
-      <HintPath>E:\visual studio 2013\Projects\My Server\DBAccess\dll\MySql.Data.dll</HintPath>
+      <HintPath>thridlib\MySql.Data.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
