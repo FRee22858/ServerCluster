@@ -1,17 +1,21 @@
-﻿using ServerShared;
+﻿using Logger;
+using ServerShared;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace GlobalServerLib.Server
 {
     public class Api:AbstractServer
     {
-        public override void Init(string[] args)
+
+        public override void InitModule(string[] args)
         {
-            throw new NotImplementedException();
+
+            return;
         }
 
         public override void Exit()
@@ -19,14 +23,11 @@ namespace GlobalServerLib.Server
             throw new NotImplementedException();
         }
 
-        public override void Run()
+        public override void Update()
         {
-            throw new NotImplementedException();
+            Thread.Sleep(10);
         }
 
-        public override void ProcessInput()
-        {
-            throw new NotImplementedException();
-        }
+
     }
 }

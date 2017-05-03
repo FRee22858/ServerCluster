@@ -1,6 +1,7 @@
 ﻿using Logger;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -43,6 +44,10 @@ namespace ServerShared
         /// </summary>
         DateTime _nextFrameBeginStamp;
         /// <summary>
+        /// 10秒计时器
+        /// </summary>
+        int _statTime = 0;
+        /// <summary>
         /// 统计帧数
         /// </summary>
         double _statFrames = 0;
@@ -53,12 +58,37 @@ namespace ServerShared
         /// <summary>
         /// 用来标记 1秒钟开始
         /// </summary>
-        DateTime _timeStartStamp;
+        DateTime _oneSecStartStamp;
+        /// <summary>
+        /// 平均每秒帧数
+        /// </summary>
+        private double _averageFramesPerSecond=0;
+        /// <summary>
+        /// 平均每秒睡眠数
+        /// </summary>
+        private double _averageSleepTimesPerSecond=0;
+        /// <summary>
+        /// 内存使用情况
+        /// </summary>
+        private long _memoryUse=0;
         /// <summary>
         /// 初始化
         /// </summary>
         public void Init()
         {
+            _now = DateTime.Now;
+            _milliSecondPerFrame = 0;
+            _frameBeginTimeStamp = _now;
+            _frameEndTimeStamp = _now;
+            _lastFrameEndStamp = _now;
+            _nextFrameBeginStamp = _now;
+            _statTime = 0;
+            _statFrames = 0;
+            _statSleepTimes = 0;
+            _oneSecStartStamp = _now;
+            _averageFramesPerSecond = 0;
+            _averageSleepTimesPerSecond = 0;
+            _memoryUse = 0;
             _milliSecondPerFrame = ONESECOND / fps;
         }
         /// <summary>
@@ -84,11 +114,10 @@ namespace ServerShared
             _frameEndTimeStamp = now;
             _lastFrameEndStamp = now;
             _nextFrameBeginStamp = _frameBeginTimeStamp.AddMilliseconds(_milliSecondPerFrame - (_frameEndTimeStamp - _frameBeginTimeStamp).TotalMilliseconds);
-            if ((_frameEndTimeStamp-_timeStartStamp).TotalSeconds > 1)
+            if ((_frameEndTimeStamp-_oneSecStartStamp).TotalSeconds > 1)
             {
-                LOG.Info("fps:{0},sleep time{1}", _statFrames, _statSleepTimes);
-                _statFrames = 0;
-                _statSleepTimes = 0;
+                RecordFrameStatPerSec((int)_statFrames,(int)_statSleepTimes);
+                Console.Write(".");
             }
         }
         /// <summary>
@@ -98,6 +127,62 @@ namespace ServerShared
         {
             fps = fpsValue;
             _milliSecondPerFrame = ONESECOND / fps;
+        }
+        /// <summary>
+        /// 获取当前平均帧数
+        /// </summary>
+        public double GetFPS()
+        {
+            return _averageFramesPerSecond; 
+        }
+        /// <summary>
+        /// 获取当前平均睡眠时间
+        /// </summary>
+        public double GetSleepTime()
+        {
+            return _averageSleepTimesPerSecond;
+        }
+        /// <summary>
+        /// 获取当前内存使用
+        /// </summary>
+        public double GetMemorySize()
+        {
+            return _memoryUse;
+        }
+        /// <summary>
+        /// 统计最近10秒内的FPS和CPU睡眠时间等进程状态
+        /// 这个函数1秒调用一次
+        /// </summary>
+        /// <param name="frameCount">1秒内的帧数</param>
+        /// <param name="sleepTime">1秒内睡眠时间数</param>
+        private void RecordFrameStatPerSec(int frameCount,int sleepTime)
+        {
+            if (_statTime<10)
+            {
+                _statFrames += frameCount;
+                _statSleepTimes += sleepTime;
+                _statTime++;
+            }
+            else
+            {
+                _averageFramesPerSecond = _statFrames / _statTime;
+                _averageSleepTimesPerSecond = _statSleepTimes / _statTime;
+                Process proc = Process.GetCurrentProcess();
+                _memoryUse = (long)(proc.PrivateMemorySize64 / (1024 * 1024));
+                LOG.Info("fps:{0},sleepTime:{1},memorySize:{2}", _averageFramesPerSecond, _averageSleepTimesPerSecond, _memoryUse);
+                _statTime = 0;
+                _statFrames = 0;
+                _statSleepTimes = 0;
+            }
+        }
+        /// <summary>
+        /// 帧状态数据初始化
+        /// </summary>
+        public void ResetAverageFrameStat()
+        {
+            _averageFramesPerSecond = 0;
+            _averageSleepTimesPerSecond = 0;
+            _memoryUse = 0;
         }
     }
 }

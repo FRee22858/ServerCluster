@@ -48,6 +48,10 @@
       <Project>{1a5cc1c9-6c28-46bf-a0e3-c7b26363389e}</Project>
       <Name>Logger</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ServerLogger\ServerLogger.csproj">
+      <Project>{b2c5ebfa-c774-4943-9325-5f0650b92af3}</Project>
+      <Name>ServerLogger</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -16,11 +16,12 @@ namespace GlobalServer
             {
                 api.ServerName = "GlobalServer";
                 api.StartMode = Mode.Auto;
+                api.InitLogger();
                 api.Init(args);
             }
             catch (Exception e)
             {
-                LOG.Error("Global init failed:{0}", e.ToString());
+                LOG.Error("{0} init failed:{1}", api.ServerName, e.ToString());
                 api.Exit();
                 return;
             }
@@ -28,7 +29,7 @@ namespace GlobalServer
             Thread thread = new Thread(api.Run);
             thread.Start();
 
-            LOG.Info("Global Server OnReady..");
+            LOG.Info("{0} OnReady..", api.ServerName);
 
             while (thread.IsAlive)
             {
@@ -37,7 +38,7 @@ namespace GlobalServer
             }
 
             api.Exit();
-            LOG.Info("Global Server Exit..");
+            LOG.Info("{0} Exit..", api.ServerName);
         }
     }
 }
