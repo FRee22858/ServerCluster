@@ -14,7 +14,6 @@ namespace GlobalServerLib.Server
 
         public override void InitModule(string[] args)
         {
-
             return;
         }
 
@@ -25,6 +24,7 @@ namespace GlobalServerLib.Server
 
         public override void Update()
         {
+            //frTODO:主循环
             Thread.Sleep(10);
         }
 

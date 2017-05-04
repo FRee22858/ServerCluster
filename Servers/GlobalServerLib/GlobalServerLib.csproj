@@ -44,6 +44,7 @@
     <Compile Include="Server\Api_Init.cs" />
     <Compile Include="Server\Api_Members.cs" />
     <Compile Include="Server\Api_Regist.cs" />
+    <Compile Include="Server\Api_Update.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\CommonLibrarys\Library\Logger\Logger.csproj">
