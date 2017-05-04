@@ -15,8 +15,6 @@ namespace GlobalServer
             try
             {
                 api.ServerName = "GlobalServer";
-                api.StartMode = Mode.Auto;
-                api.InitLogger();
                 api.Init(args);
             }
             catch (Exception e)
