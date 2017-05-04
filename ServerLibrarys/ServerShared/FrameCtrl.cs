@@ -60,6 +60,14 @@ namespace ServerShared
         /// </summary>
         DateTime _oneSecStartStamp;
         /// <summary>
+        /// 用来标记 1秒钟帧数
+        /// </summary>
+        private double _oneSecFrames;
+        /// <summary>
+        /// 用来标记 1秒钟睡眠数
+        /// </summary>
+        private double _oneSecSleepTimes;
+        /// <summary>
         /// 平均每秒帧数
         /// </summary>
         private double _averageFramesPerSecond=0;
@@ -86,6 +94,8 @@ namespace ServerShared
             _statFrames = 0;
             _statSleepTimes = 0;
             _oneSecStartStamp = _now;
+            _oneSecFrames = 0;
+            _oneSecSleepTimes = 0;
             _averageFramesPerSecond = 0;
             _averageSleepTimesPerSecond = 0;
             _memoryUse = 0;
@@ -99,11 +109,12 @@ namespace ServerShared
             DateTime now = DateTime.Now;
             while (now<_nextFrameBeginStamp)
             {
+                now = DateTime.Now;
                 Thread.Sleep(1);
             }
             _frameBeginTimeStamp = now;
-            _statSleepTimes += (now - _lastFrameEndStamp).TotalMilliseconds; 
-            _statFrames++;
+            _oneSecSleepTimes += (now - _lastFrameEndStamp).TotalMilliseconds;
+            _oneSecFrames++;
         }
         /// <summary>
         /// 设置帧结束点
@@ -113,11 +124,13 @@ namespace ServerShared
             DateTime now = DateTime.Now;
             _frameEndTimeStamp = now;
             _lastFrameEndStamp = now;
-            _nextFrameBeginStamp = _frameBeginTimeStamp.AddMilliseconds(_milliSecondPerFrame - (_frameEndTimeStamp - _frameBeginTimeStamp).TotalMilliseconds);
+            _nextFrameBeginStamp = _frameEndTimeStamp.AddMilliseconds(_milliSecondPerFrame - (_frameEndTimeStamp - _frameBeginTimeStamp).TotalMilliseconds);
             if ((_frameEndTimeStamp-_oneSecStartStamp).TotalSeconds > 1)
             {
-                RecordFrameStatPerSec((int)_statFrames,(int)_statSleepTimes);
-                Console.Write(".");
+                RecordFrameStatPerSec((int)_oneSecFrames, (int)_oneSecSleepTimes);
+                _oneSecFrames = 0;
+                _oneSecSleepTimes = 0;
+                _oneSecStartStamp = now;
             }
         }
         /// <summary>
@@ -157,7 +170,7 @@ namespace ServerShared
         /// <param name="sleepTime">1秒内睡眠时间数</param>
         private void RecordFrameStatPerSec(int frameCount,int sleepTime)
         {
-            if (_statTime<10)
+            if (_statTime<9)
             {
                 _statFrames += frameCount;
                 _statSleepTimes += sleepTime;
@@ -165,6 +178,7 @@ namespace ServerShared
             }
             else
             {
+                //从0 开始这里是到9了，正好10秒
                 _averageFramesPerSecond = _statFrames / _statTime;
                 _averageSleepTimesPerSecond = _statSleepTimes / _statTime;
                 Process proc = Process.GetCurrentProcess();
