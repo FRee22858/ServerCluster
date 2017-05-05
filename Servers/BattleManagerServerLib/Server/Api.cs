@@ -24,7 +24,7 @@ namespace BattleManagerServerLib.Server
         public override void Update()
         {
             //frTODO:主循环
-            Thread.Sleep(100);
+            Thread.Sleep(10);
         }
 
 
