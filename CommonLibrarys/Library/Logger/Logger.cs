@@ -6,6 +6,12 @@ using System.Threading.Tasks;
 
 namespace Logger
 {
+    public enum LogType
+    {
+        WARN = 1,
+        INFO = 2,
+        ERROR = 3,
+    }
     public static class LOG
     {
         static private ILogger _logger;

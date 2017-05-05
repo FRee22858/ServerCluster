@@ -41,11 +41,17 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Server\Api.cs" />
+    <Compile Include="Server\BattleServer.cs" />
+    <Compile Include="Server\BattleSeverManager.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\ServerLibrarys\ServerShared\ServerShared.csproj">
-      <Project>{cfdc6280-bb16-4a89-8eb4-515251d188c9}</Project>
-      <Name>ServerShared</Name>
+    <ProjectReference Include="..\..\CommonLibrarys\Library\SocketShared\SocketShared.csproj">
+      <Project>{2628d176-f2fd-4751-b847-6ccc2cb92a23}</Project>
+      <Name>SocketShared</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ServerLibrarys\ServerSocket\ServerSocket.csproj">
+      <Project>{ae6d5d3b-9191-4522-9abe-a0bae3a4d0db}</Project>
+      <Name>ServerSocket</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

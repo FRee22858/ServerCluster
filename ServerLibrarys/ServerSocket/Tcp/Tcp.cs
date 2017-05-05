@@ -69,13 +69,6 @@ namespace ServerSocket.Tcp
         {
             Console.WriteLine("default on DefaultOnDisconnect function called,check it");
         }
-        enum State
-        {
-            IDLE = 0,
-            WAIT,
-            RUN,
-            CLOSE,
-        }
 
         IList<ArraySegment<byte>> sendStreams = new List<ArraySegment<byte>>();
         IList<ArraySegment<byte>> waitStreams = new List<ArraySegment<byte>>();
@@ -85,6 +78,14 @@ namespace ServerSocket.Tcp
         public string IP { get; set; }
         private Socket _socket = null;
         private ushort _port = 0;
+        enum State
+        {
+            IDLE = 0,
+            WAIT,
+            RUN,
+            CLOSE,
+        }
+
         private int _state = (int)State.IDLE;
         private int _offset = 0;
         public bool Accept(ushort port)
