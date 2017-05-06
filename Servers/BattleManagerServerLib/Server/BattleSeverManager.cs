@@ -44,23 +44,33 @@ namespace BattleManagerServerLib.Server
             }
         }
 
-        public void BindServer(BattleServer server)
+        public void BindServer(BattleServer battleServer)
         {
-            if (server == null)
+            if (battleServer == null)
             {
                 LOG.Error("Bind battleserver failed:server is null!");
                 return;
             }
-            else
+            lock(allBattleServersLock)
             {
-                string key = Api.GetBattleKey();
+                AllBattleServers.Add(battleServer);
             }
         }
 
 
         internal void DistoryServer(BattleServer battleServer)
         {
-            throw new NotImplementedException();
+            if (battleServer == null)
+            {
+                LOG.Error("Bind battleserver failed:server is null!");
+                return;
+            }
+            lock (allBattleServersLock)
+            {
+                AllBattleServers.Remove(battleServer);
+                string key = Api.GetBattleKey();
+                BattleServerList.Remove(key);
+            }
         }
     }
 }
