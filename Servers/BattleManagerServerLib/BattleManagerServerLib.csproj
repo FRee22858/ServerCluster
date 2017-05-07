@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="protobuf-net">
+      <HintPath>..\..\Protocol\Protobuf-net\ProtoGen\protobuf-net.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -45,23 +48,21 @@
     <Compile Include="Server\BattleSeverManager.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\CommonLibrarys\Library\SocketShared\SocketShared.csproj">
-      <Project>{2628d176-f2fd-4751-b847-6ccc2cb92a23}</Project>
-      <Name>SocketShared</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\ServerLibrarys\ServerSocket\ServerSocket.csproj">
-      <Project>{ae6d5d3b-9191-4522-9abe-a0bae3a4d0db}</Project>
-      <Name>ServerSocket</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\..\CommonLibrarys\Library\Logger\Logger.csproj">
       <Project>{1a5cc1c9-6c28-46bf-a0e3-c7b26363389e}</Project>
       <Name>Logger</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\CommonLibrarys\Library\SocketShared\SocketShared.csproj">
+      <Project>{2628d176-f2fd-4751-b847-6ccc2cb92a23}</Project>
+      <Name>SocketShared</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\ServerLibrarys\ServerShared\ServerShared.csproj">
       <Project>{cfdc6280-bb16-4a89-8eb4-515251d188c9}</Project>
       <Name>ServerShared</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ServerLibrarys\ServerSocket\ServerSocket.csproj">
+      <Project>{ae6d5d3b-9191-4522-9abe-a0bae3a4d0db}</Project>
+      <Name>ServerSocket</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

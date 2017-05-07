@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BattleManagerServerLib.Server
 {
-    class BattleSeverManager
+    public class BattleSeverManager
     {
            Api _api = null;
         public Api Api
@@ -68,7 +68,7 @@ namespace BattleManagerServerLib.Server
             lock (allBattleServersLock)
             {
                 AllBattleServers.Remove(battleServer);
-                string key = Api.GetBattleKey();
+                string key = battleServer.GetKey();
                 BattleServerList.Remove(key);
             }
         }

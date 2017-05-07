@@ -1,5 +1,4 @@
 ﻿using Logger;
-using ServerShared;
 using ServerSocket.Tcp;
 using System;
 using System.Collections.Generic;
@@ -7,6 +6,8 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ServerShared;
+using SocketShared;
 
 namespace BattleManagerServerLib.Server
 {
@@ -69,27 +70,17 @@ namespace BattleManagerServerLib.Server
             BindResponser();
             InitLogList();
         }
-
+        private void InitLogList()
+        {
+            LogList.Add(LogType.INFO, new Queue<string>());
+            LogList.Add(LogType.WARN, new Queue<string>());
+            LogList.Add(LogType.ERROR, new Queue<string>());
+        }
         private void InitTcp()
         {
             Tcp.OnRead = OnRead;
             Tcp.OnAccept = OnAccept;
             Tcp.OnDisconnect = OnDisconnect;
-        }
-
-        private void OnDisconnect()
-        {
-            throw new NotImplementedException();
-        }
-
-        private void OnAccept(bool ret)
-        {
-            throw new NotImplementedException();
-        }
-
-        private void OnRead(MemoryStream stream)
-        {
-            throw new NotImplementedException();
         }
 
         private void StartListen(ushort listenPort)
@@ -191,7 +182,7 @@ namespace BattleManagerServerLib.Server
             }
         }
 
-        protected void OnAccept(bool ret)
+        private void OnAccept(bool ret)
         {
             string log = string.Format("battle {0} sub {1} connected!");
             lock (LogList[LogType.INFO])
@@ -202,7 +193,30 @@ namespace BattleManagerServerLib.Server
             BattleServerManager.BindServer(this);
         }
 
-        protected void OnDisconnect()
+        private void OnRead(MemoryStream stream)
+        {
+            int startIndex = 0;
+            byte[] buffer = stream.GetBuffer();
+            while ((stream.Length - startIndex) > sizeof(UInt16))
+            {
+                UInt16 size = BitConverter.ToUInt16(buffer, startIndex);
+                if (size +SocketHeader.Size>stream.Length-startIndex)
+                {
+                    break;
+                }
+                UInt32 msgId = BitConverter.ToUInt32(buffer, startIndex + sizeof(UInt16));
+                MemoryStream msg = new MemoryStream(buffer, startIndex + SocketHeader.Size, size,true,true);
+
+                lock (_msgQueue)
+                {
+                    _msgQueue.Enqueue(new KeyValuePair<UInt32, MemoryStream>(msgId, msg));
+                    startIndex += (size + SocketHeader.Size);
+                }
+            }
+            stream.Seek(startIndex, SeekOrigin.Begin);
+        }
+
+        private void OnDisconnect()
         {
             lock (LogList)
             {
@@ -213,15 +227,66 @@ namespace BattleManagerServerLib.Server
                 {
                     State = ServerState.DisConnect;
                     BattleServerManager.DistoryServer(this);
-                    Reset();
+                    ResetMsgQueue();
                     State = ServerState.Stopped;
                 }
             }
         }
 
+        Queue<KeyValuePair<UInt32, MemoryStream>> _msgQueue = new Queue<KeyValuePair<uint, MemoryStream>>();
+        Queue<KeyValuePair<UInt32, MemoryStream>> _dealQueue = new Queue<KeyValuePair<uint, MemoryStream>>();
         private void OnProcessProtocol()
         {
-            throw new NotImplementedException();
+            lock (_msgQueue)
+            {
+                while (_msgQueue.Count>0)
+                {
+                    var msg = _msgQueue.Dequeue();
+                    _dealQueue.Enqueue(msg);
+                }
+            }
+            while (_dealQueue.Count>0)
+            {
+                var msg = _dealQueue.Dequeue();
+                OnResponse(msg.Key, msg.Value);
+            }
+        }
+
+        public bool Write<T> (T msg) where T:global::ProtoBuf.IExtensible
+        {
+            MemoryStream body = new MemoryStream();
+            ProtoBuf.Serializer.Serialize(body, msg);
+
+            MemoryStream header = new MemoryStream(sizeof(ushort)+sizeof(uint));
+            ushort len = (ushort)body.Length;
+            header.Write(BitConverter.GetBytes(len), 0, 2);
+            header.Write(BitConverter.GetBytes(Id<T>.Value), 0, 4);
+            return Write(header,body);
+        }
+
+        private bool Write(MemoryStream header, MemoryStream body)
+        {
+            if (Tcp ==null)
+            {
+                return false;    
+            }
+            return Tcp.Write(header,body);
+        }
+
+        private void ResetMsgQueue()
+        {
+            _msgQueue.Clear();
+            _dealQueue.Clear();
+        }
+
+        public string GetKey()
+        {
+            return string.Format("{0}_{1}", MainId.ToString(), SubId.ToString());
+        }
+
+        public string MakeKey(int mainId,int subId)
+        {
+            return string.Format("{0}_{1}", mainId, subId);
         }
     }
 }
