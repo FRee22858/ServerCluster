@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ServerShared;
 using SocketShared;
+using ServerProtocol;
 
 namespace BattleManagerServerLib.Server
 {

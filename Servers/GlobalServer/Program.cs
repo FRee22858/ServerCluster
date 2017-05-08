@@ -1,9 +1,8 @@
 ﻿using System;
-using BattleManagerServerLib.Server;
 using Logger;
 using System.Threading;
 using ServerShared;
-using BattleManagerServerLib;
+using GlobalServerLib.Server;
 
 namespace GlobalServer
 {

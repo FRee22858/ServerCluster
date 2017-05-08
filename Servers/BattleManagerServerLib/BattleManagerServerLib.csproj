@@ -56,6 +56,10 @@
       <Project>{2628d176-f2fd-4751-b847-6ccc2cb92a23}</Project>
       <Name>SocketShared</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Protocol\ServerProtocol\ServerProtocol.csproj">
+      <Project>{94623506-6c6c-4a20-b93f-97bb1fd872de}</Project>
+      <Name>ServerProtocol</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\ServerLibrarys\ServerShared\ServerShared.csproj">
       <Project>{cfdc6280-bb16-4a89-8eb4-515251d188c9}</Project>
       <Name>ServerShared</Name>

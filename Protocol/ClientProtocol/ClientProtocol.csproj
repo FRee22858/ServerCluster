@@ -43,7 +43,6 @@
     <Compile Include="Gate\Protocol\CGate.code.proto.cs" />
     <Compile Include="Gate\Protocol\GateC.code.cs" />
     <Compile Include="Gate\Protocol\GateC.code.proto.cs" />
-    <Compile Include="Id.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Zone\Protocol\CZ.code.cs" />
     <Compile Include="Zone\Protocol\CZ.code.proto.cs" />
