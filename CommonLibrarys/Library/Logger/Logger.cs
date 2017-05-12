@@ -14,7 +14,7 @@ namespace Logger
     }
     public static class LOG
     {
-        static private ILogger _logger;
+        static private ILogger _logger = new DeafaultLogger();
         static public void InitLogger(ILogger logger)
         {
             _logger = logger;
