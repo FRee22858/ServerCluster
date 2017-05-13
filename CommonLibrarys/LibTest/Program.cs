@@ -64,8 +64,18 @@ namespace LibTest
             InitPath();
             InitData();
             InitConfig();
+            InitServer();
         }
-            
+
+        private static void InitServer()
+        {
+            InitBattleServer();
+        }
+
+        private static void InitBattleServer()
+        {
+            throw new NotImplementedException();
+        }
        
     }
 }
