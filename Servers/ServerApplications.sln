@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CommonLibrary", "CommonLibrary", "{666C22E2-D84B-49C3-BD59-F5CBCE5F38BD}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Protocol", "Protocol", "{1EF7259E-9E75-4323-BF84-6345AB144FA5}"
+	ProjectSection(SolutionItems) = preProject
+		..\Protocol\BuildClientProtocol\num.txt = ..\Protocol\BuildClientProtocol\num.txt
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ServerLibrarys", "ServerLibrarys", "{E6C1968B-0832-4998-95E5-1BFBBB9561F9}"
 EndProject
